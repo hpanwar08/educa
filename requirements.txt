@@ -1,0 +1,5 @@
+Django
+psycopg2
+Pillow
+django-widget-tweaks
+django-debug-toolbar
