@@ -2,4 +2,5 @@ Django
 psycopg2
 Pillow
 django-widget-tweaks
+django-braces
 django-debug-toolbar

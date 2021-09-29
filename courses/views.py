@@ -1,3 +1,4 @@
+from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.forms.models import modelform_factory
@@ -103,7 +104,7 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
 
     def get(self, request, *args, **kwargs):
         form = self.get_form(self.model, instance=self.content_obj)
-        return self.render_to_response(context={'form': form, 'object': self.content_obj, 'module':self.module})
+        return self.render_to_response(context={'form': form, 'object': self.content_obj, 'module': self.module})
 
     def post(self, request, *args, **kwargs):
         form = self.get_form(self.model, instance=self.content_obj, data=request.POST, files=request.FILES)
@@ -145,5 +146,19 @@ class ModuleContentListView(ListView):
         return get_object_or_404(Module, id=self.kwargs['module_id'], course__owner=self.request.user)
 
 
-from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.models import User
+class ModuleOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+
+    def post(self, request):
+        for module_id, order in self.request_json.items():
+            Module.objects.filter(id=module_id, course__owner=request.user).update(order=order)
+
+        return self.render_json_response({'saved': 'OK'})
+
+
+class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+
+    def post(self, request):
+        for content_id, order in self.request_json.items():
+            Content.objects.filter(id=content_id, module__course__owner=request.user).update(order=order)
+
+        return self.render_json_response({'saved': 'OK'})

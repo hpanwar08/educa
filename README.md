@@ -8,6 +8,8 @@ Django features used
 * Template framework
 * Class based views
 * Custom template filter
+* Drag Drop sorting of modules
+* Ajax requests
 
 
 ## Steps to run
