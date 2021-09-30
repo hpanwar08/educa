@@ -28,7 +28,7 @@
 
               <li data-id="{{ m.id }}">
                 <a href="{% url 'module_content_list' m.id %}"
-                   class="list-group-item list-group-item-action {% if m == module %}active{% endif %}">
+                   class="list-group-item list-group-item-action {% if m == module %}list-group-item-info{% endif %}">
                   Module <span id="order">{{ m.order|add:1 }}</span>
                   <br>
                   <em>{{ m.title }}</em>
