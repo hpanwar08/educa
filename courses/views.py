@@ -9,6 +9,8 @@ from django.views.generic.base import TemplateResponseMixin, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
 
 from courses.forms import ModuleFormset
 from courses.models import Course, Module, Content, Subject
@@ -187,3 +189,5 @@ class CourseDetailView(DetailView):
     model = Course
     template_name = 'courses/course/detail.html'
     context_object_name = 'course'
+
+

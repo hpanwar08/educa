@@ -17,6 +17,7 @@
       <h1>All Courses</h1>
     {% endif %}
   </div>
+  <hr>
 
   <div class="row">
 
@@ -55,6 +56,14 @@
     <!-- contents -->
     <div class="col-md-9">
       <div class="col-md-12">
+        <div class="text-secondary ms-2">
+          {% if subject %}
+            <h3>{{ subject.title }} courses</h3>
+          {% else %}
+            <h3>All Courses</h3>
+          {% endif %}
+        </div>
+
 
         {% for c in courses %}
           {% with sub=c.subject %}

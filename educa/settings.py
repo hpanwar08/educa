@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'widget_tweaks',
+    'students.apps.StudentsConfig'
 ]
 
 MIDDLEWARE = [

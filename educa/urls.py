@@ -17,6 +17,7 @@ import debug_toolbar
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from courses import views as course_views
+from students import views as students_views
 from django.urls import path, include
 
 urlpatterns = [
@@ -25,5 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('course/', include('courses.urls')),
     path('', course_views.CourseListView.as_view(), name='course_list'),
+    path('students/', include('students.urls')),
     path('__debug__/', include(debug_toolbar.urls))
 ]
