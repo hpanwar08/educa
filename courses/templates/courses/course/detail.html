@@ -2,9 +2,29 @@
 {% load widget_tweaks %}
 
 {% block title %}
-  Detail
+  {{ course.title }}
 {% endblock %}
 
 {% block content %}
-  Detail {{ course.title }}
+  {% with subject=course.subject %}
+    <div class="row col-md-12 mb-3">
+      <h2 class="text-center text-secondary">{{ course.title }} Course</h2>
+
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2"></div>
+
+      <div class="col-md-8">
+        <h3 class="text-secondary">Overview</h3>
+        <p><a href="{% url 'course_list_subject' subject.slug %}"
+              class="link-info text-decoration-none">{{ subject }}</a> {{ course.modules.count }} modules</p>
+        <small><em>Instructor: {{ course.owner.get_full_name }}</em></small>
+        <p>{{ course.overview|linebreaks }}</p>
+      </div>
+
+      <div class="col-md-2"></div>
+
+    </div>
+  {% endwith %}
 {% endblock %}

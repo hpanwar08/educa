@@ -179,7 +179,7 @@ class CourseListView(TemplateResponseMixin, View):
 
         if subject:
             subject = get_object_or_404(Subject, slug=subject)
-            courses = courses.filter(subject=subject)
+            courses = courses.filter(subject=subject).order_by('-created')
         return self.render_to_response({'subjects': subjects, 'courses': courses, 'subject': subject})
 
 
