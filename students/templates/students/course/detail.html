@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+  {{ course.title }}
+{% endblock %}
+
+{% block content %}
+  <!-- heading -->
+  <div></div>
+
+  <div class="row">
+    <!-- sidebar -->
+    <div class="col-md-3">
+      <div class="list-group">
+        {% for m in course.modules.all %}
+          <a href="{% url 'students:student_course_detail_module' course.id m.id %}"
+             class="list-group-item list-group-item-action {% if m.id == module.id %}list-group-item-info{% endif %}">
+            Module {{ m.order|add:1 }}
+            <br>
+            <em>{{ m.title }}</em>
+          </a>
+        {% empty %}
+          No modules yet
+        {% endfor %}
+
+      </div>
+    </div>
+
+    <!-- main content -->
+    <div class="col-md-9">
+      {% for content in module.contents.all %}
+        {% with item=content.item %}
+          <h2>{{ item.title }}</h2>
+          {{ item.render }}
+        {% endwith %}
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+{% endblock %}

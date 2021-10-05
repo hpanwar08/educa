@@ -68,7 +68,7 @@
         {% for c in courses %}
           {% with sub=c.subject %}
 
-            <div class="card">
+            <div class="card mb-1">
               <div class="card-body ms-2">
                 <h4 class="card-title"><a class="link-info text-decoration-none"
                                           href="{% url 'course_detail' c.slug %}">{{ c.title }}</a></h4>

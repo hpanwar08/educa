@@ -2,13 +2,13 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import FormView
-
-from students.forms import CourseEnrollForm
-from django.views.generic.base import TemplateResponseMixin, View
 from django.views.generic.list import ListView
+
 from courses.models import Course
+from students.forms import CourseEnrollForm
 
 
 # Create your views here.
@@ -48,3 +48,25 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.filter(students__in=[self.request.user])
+
+
+class StudentCourseDetailView(DetailView):
+    model = Course
+    template_name = 'students/course/detail.html'
+    context_object_name = 'course'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(students__in=[self.request.user])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        course = self.get_object()
+
+        if 'module_id' in self.kwargs:
+            context['module'] = course.modules.get(id=self.kwargs['module_id'])
+        else:
+            context['module'] = course.modules.all()[0]
+
+        return context

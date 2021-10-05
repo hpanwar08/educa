@@ -54,6 +54,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}">
                 <button type="submit" class="btn btn-info text-white">Log In</button>
+                <a class="link-primary text-decoration-none" href="{% url 'students:student_registration' %}">Register</a>
               </div>
             </div>
           </form>
