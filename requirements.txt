@@ -3,4 +3,6 @@ psycopg2
 Pillow
 django-widget-tweaks
 django-braces
+django-embed-video
+python-memcached
 django-debug-toolbar

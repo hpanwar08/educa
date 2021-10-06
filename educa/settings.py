@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'widget_tweaks',
-    'students.apps.StudentsConfig'
+    'students.apps.StudentsConfig',
+    'embed_video'
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_ROOT = BASE_DIR
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
