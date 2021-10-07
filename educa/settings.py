@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,7 +43,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'widget_tweaks',
     'students.apps.StudentsConfig',
-    'embed_video'
+    'embed_video',
+    'memcache_status'
 ]
 
 MIDDLEWARE = [
@@ -85,10 +87,11 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "educa",
-        "USER": "postgres",
-        "PASSWORD": "root",
-        "HOST": "host.docker.internal",
+        "NAME": os.environ.get("POSTGRES_DB", "educa"),
+        "USER": os.environ.get("POSTGRES_USER", "postgres"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "root"),
+        # "HOST": "host.docker.internal",
+        "HOST": os.environ.get("POSTGRES_HOST", "db"),
         "PORT": "5432",
     }
 }
@@ -153,3 +156,24 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 LOGIN_REDIRECT_URL = reverse_lazy('students:student_course_list')
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'cache:11211'
+    }
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}

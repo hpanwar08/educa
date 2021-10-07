@@ -1,6 +1,9 @@
+import logging
+
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.cache import cache
 from django.db.models import Count
 from django.forms.models import modelform_factory
 from django.shortcuts import get_object_or_404, redirect
@@ -13,6 +16,9 @@ from django.views.generic.list import ListView
 from courses.forms import ModuleFormset
 from courses.models import Course, Module, Content, Subject
 from students.forms import CourseEnrollForm
+
+
+# logger = logging.getLogger('educa')
 
 
 class OwnerMixin:
@@ -175,12 +181,30 @@ class CourseListView(TemplateResponseMixin, View):
     model = Course
 
     def get(self, request, subject=None):
-        subjects = Subject.objects.annotate(total_courses=Count('courses'))
-        courses = Course.objects.annotate(total_modules=Count('modules'))
+        subjects = cache.get('all_subjects')
+        if not subjects:
+            logging.info('subjects not in cache')
+            subjects = Subject.objects.annotate(total_courses=Count('courses'))
+            cache.set('all_subjects', subjects)
+
+        all_courses = Course.objects.annotate(total_modules=Count('modules'))
 
         if subject:
             subject = get_object_or_404(Subject, slug=subject)
-            courses = courses.filter(subject=subject).order_by('-created')
+
+            key = f"subject_{subject.id}_courses"
+            courses = cache.get(key)
+            if not courses:
+                logging.info(f"filtered courses not in cache {key}")
+                courses = all_courses.filter(subject=subject).order_by('-created')
+                cache.set(key, courses)
+        else:
+            courses = cache.get('all_courses')
+            if not courses:
+                logging.info("courses not in cache")
+                courses = all_courses
+                cache.set('all_courses', courses)
+
         return self.render_to_response({'subjects': subjects, 'courses': courses, 'subject': subject})
 
 
