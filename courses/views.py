@@ -125,6 +125,9 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
             if not kwargs.get('id'):
                 Content.objects.create(module=self.module, item=obj)
                 return redirect('module_content_list', self.module.id)
+            else:
+                return redirect('module_content_list', self.module.id)
+
 
         return self.render_to_response(context={'form': form, 'object': self.content_obj})
 

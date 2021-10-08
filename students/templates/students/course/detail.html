@@ -8,7 +8,9 @@
 
 {% block content %}
   <!-- heading -->
-  <div></div>
+  <div class="row">
+  <h1 class="text-secondary text-center">{{ course.title }}</h1>
+  </div>
 
   <div class="row">
     <!-- sidebar -->
@@ -30,10 +32,10 @@
 
     <!-- main content -->
     <div class="col-md-9">
-    {% cache 600 modules_content module %}
+    {% cache 60 modules_content module %}
       {% for content in module.contents.all %}
         {% with item=content.item %}
-          <h2>{{ item.title }}</h2>
+          <h2 class="text-secondary">{{ item.title }}</h2>
           {{ item.render }}
         {% endwith %}
       {% endfor %}

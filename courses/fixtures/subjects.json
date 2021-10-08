@@ -3,8 +3,8 @@
   "model": "courses.subject",
   "pk": 1,
   "fields": {
-    "title": "Mathematics",
-    "slug": "mathematics"
+    "title": "Programming",
+    "slug": "programming"
   }
 },
 {
@@ -19,16 +19,137 @@
   "model": "courses.subject",
   "pk": 3,
   "fields": {
-    "title": "Physics",
-    "slug": "physics"
+    "title": "Photography",
+    "slug": "photography"
   }
 },
 {
   "model": "courses.subject",
   "pk": 4,
   "fields": {
-    "title": "Programming",
-    "slug": "programming"
+    "title": "Mathematics",
+    "slug": "mathematics"
+  }
+},
+{
+  "model": "courses.course",
+  "pk": 1,
+  "fields": {
+    "owner": 2,
+    "subject": 1,
+    "title": "Django 101",
+    "slug": "django-101",
+    "overview": "With Django, you can take web applications from concept to launch in a matter of hours. Django takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source.",
+    "created": "2021-10-07T08:51:04.033Z",
+    "students": [
+      3
+    ]
+  }
+},
+{
+  "model": "courses.course",
+  "pk": 2,
+  "fields": {
+    "owner": 2,
+    "subject": 1,
+    "title": "Python 101",
+    "slug": "python-101",
+    "overview": "python",
+    "created": "2021-10-07T09:05:36.565Z",
+    "students": []
+  }
+},
+{
+  "model": "courses.module",
+  "pk": 1,
+  "fields": {
+    "course": 1,
+    "title": "Introduction to Django",
+    "description": "Django includes dozens of extras you can use to handle common web development tasks. Django takes care of user authentication, content administration, site maps, RSS feeds, and many more tasks — right out of the box.",
+    "order": 0
+  }
+},
+{
+  "model": "courses.module",
+  "pk": 2,
+  "fields": {
+    "course": 1,
+    "title": "Django Installation",
+    "description": "Installation",
+    "order": 1
+  }
+},
+{
+  "model": "courses.module",
+  "pk": 3,
+  "fields": {
+    "course": 1,
+    "title": "Django cheatsheet",
+    "description": "Cheatsheet for Django",
+    "order": 2
+  }
+},
+{
+  "model": "courses.content",
+  "pk": 1,
+  "fields": {
+    "module": 1,
+    "content_type": 5,
+    "object_id": 1,
+    "order": 0
+  }
+},
+{
+  "model": "courses.content",
+  "pk": 2,
+  "fields": {
+    "module": 3,
+    "content_type": 6,
+    "object_id": 1,
+    "order": 0
+  }
+},
+{
+  "model": "courses.content",
+  "pk": 3,
+  "fields": {
+    "module": 2,
+    "content_type": 4,
+    "object_id": 1,
+    "order": 0
+  }
+},
+{
+  "model": "courses.text",
+  "pk": 1,
+  "fields": {
+    "owner": 2,
+    "title": "Intro",
+    "created": "2021-10-07T08:53:28.931Z",
+    "updated": "2021-10-07T08:53:28.931Z",
+    "content": "Why Django?\r\nWith Django, you can take web applications from concept to launch in a matter of hours. Django takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source."
+  }
+},
+{
+  "model": "courses.image",
+  "pk": 1,
+  "fields": {
+    "owner": 2,
+    "title": "Cheatsheet",
+    "created": "2021-10-07T08:54:29.540Z",
+    "updated": "2021-10-07T08:54:29.540Z",
+    "content": "images/6850685ccc91b0636823d637c25099e0_FAQRWlq.png"
+  }
+},
+{
+  "model": "courses.video",
+  "pk": 1,
+  "fields": {
+    "owner": 2,
+    "title": "Installation",
+    "created": "2021-10-07T08:54:57.514Z",
+    "updated": "2021-10-07T08:54:57.515Z",
+    "content": "https://www.youtube.com/watch?v=LQTMqGns7Co"
   }
 }
 ]

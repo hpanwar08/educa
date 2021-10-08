@@ -6,4 +6,5 @@ django-braces
 django-embed-video
 python-memcached
 django-memcache-status
+djangorestframework
 django-debug-toolbar

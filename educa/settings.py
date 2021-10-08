@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'students.apps.StudentsConfig',
     'embed_video',
-    'memcache_status'
+    'memcache_status',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -176,4 +177,10 @@ LOGGING = {
         'handlers': ['console'],
         'level': 'DEBUG',
     },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES':[
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }
