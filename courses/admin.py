@@ -25,4 +25,4 @@ class CourseAdmin(admin.ModelAdmin):
 
 
 # use memcache admin index site
-admin.site.index_template = 'memcache_status/admin_index.html'
+# admin.site.index_template = 'memcache_status/admin_index.html'

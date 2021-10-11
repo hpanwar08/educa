@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'students.apps.StudentsConfig',
     'embed_video',
-    'memcache_status',
-    'rest_framework'
+    'rest_framework',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
@@ -158,12 +158,23 @@ DEBUG_TOOLBAR_CONFIG = {
 
 LOGIN_REDIRECT_URL = reverse_lazy('students:student_course_list')
 
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': 'cache:11211'
+#     }
+# }
+
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': 'cache:11211'
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://cache:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
     }
 }
+
 
 LOGGING = {
     'version': 1,
@@ -184,3 +195,4 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+

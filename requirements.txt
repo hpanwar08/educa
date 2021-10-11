@@ -1,10 +1,14 @@
-Django
+Django==3.1.13
 psycopg2
 Pillow
 django-widget-tweaks
 django-braces
 django-embed-video
-python-memcached
-django-memcache-status
+django-redis==5.0.0
+# python-memcached
+# django-memcache-status
 djangorestframework
-django-debug-toolbar
+drf-yasg
+pyyaml
+uritemplate
+django-debug-toolbar==3.2.2

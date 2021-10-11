@@ -32,14 +32,14 @@
 
     <!-- main content -->
     <div class="col-md-9">
-    {% cache 60 modules_content module %}
+{#    {% cache 60 modules_content module %}#}
       {% for content in module.contents.all %}
         {% with item=content.item %}
           <h2 class="text-secondary">{{ item.title }}</h2>
           {{ item.render }}
         {% endwith %}
       {% endfor %}
-    {% endcache %}
+{#    {% endcache %}#}
 
     </div>
 

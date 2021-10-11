@@ -10,10 +10,11 @@ Django features used
 * Custom template filter
 * Drag Drop sorting of modules
 * Ajax requests
+* Caching
+* REST API using djangorestframework
 
 
 ## Steps to run
 * Install postgres
 * Install docker
-* Run docker-compose build
-* Run docker-compose up
+* Run docker-compose up --build

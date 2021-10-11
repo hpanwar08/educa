@@ -23,7 +23,8 @@ services:
       - POSTGRES_DB=educa
 
   cache:
-    image: memcached:1.6.10-alpine
+#    image: memcached:1.6.10-alpine
+    image: redis:6-alpine
 
 volumes:
   postgres_data:
