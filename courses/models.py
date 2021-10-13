@@ -74,18 +74,33 @@ class ItemBase(models.Model):
     def render(self):
         return render_to_string(f"courses/content/{self._meta.model_name}.html", {'item':self})
 
+    def to_json(self):
+        return ''
+
 
 class Text(ItemBase):
     content = models.TextField()
+
+    def to_json(self):
+        return self.content
 
 
 class File(ItemBase):
     content = models.FileField(upload_to='files')
 
+    def to_json(self):
+        return self.content.url
+
 
 class Image(ItemBase):
     content = models.ImageField(upload_to='images')
 
+    def to_json(self):
+        return self.content.url
+
 
 class Video(ItemBase):
     content = models.URLField()
+
+    def to_json(self):
+        return self.content

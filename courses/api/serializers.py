@@ -24,8 +24,8 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class ItemRelatedField(serializers.RelatedField):
-    def to_representation(self, value):
-        return value.render()
+    def to_representation(self, instance):
+        return instance.to_json()
 
 
 class ContentSerializer(serializers.ModelSerializer):
