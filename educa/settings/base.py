@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts.apps.AccountsConfig',
     'courses.apps.CoursesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -140,6 +141,7 @@ MEDIA_URL = '/media/'
 # MEDIA_ROOT = BASE_DIR / 'media/'
 MEDIA_ROOT = BASE_DIR
 
+AUTH_USER_MODEL = 'accounts.User'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -157,6 +159,8 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 LOGIN_REDIRECT_URL = reverse_lazy('students:student_course_list')
+LOGIN_URL = reverse_lazy('accounts:login')
+LOGOUT_URL = reverse_lazy('accounts:logout')
 
 # CACHES = {
 #     'default': {

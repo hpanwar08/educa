@@ -4,6 +4,7 @@
 Django based online E-learning platform (for learning purpose)
 
 Django features used
+* Custom User model
 * Django authentication framework
 * Template framework
 * Class based views
@@ -15,6 +16,6 @@ Django features used
 
 
 ## Steps to run
-* Install postgres
 * Install docker
 * Run docker-compose up --build
+* Run docker-compose exec web python manage.py migrate
