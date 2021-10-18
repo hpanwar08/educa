@@ -4,6 +4,9 @@ from django.contrib.auth.models import Group
 from django.views.generic.edit import CreateView
 
 from accounts.forms import CustomUserRegistrationForm
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class UserRegistrationView(CreateView):
@@ -23,7 +26,8 @@ class UserRegistrationView(CreateView):
             try:
                 instructor_group = Group.objects.get(name='Instructors')
                 self.request.user.groups.add(instructor_group)
+                logger.info(f'User {self.request.user.email} registered as Instructor')
             except Group.DoesNotExist:
-                print('Instructors group does not exist')
+                logger.error('Instructors group does not exist')
 
         return result

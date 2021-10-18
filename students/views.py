@@ -9,6 +9,9 @@ from django.views.generic.list import ListView
 
 from courses.models import Course
 from students.forms import CourseEnrollForm
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 # Create your views here.
@@ -33,6 +36,7 @@ class StudentEnrollCourseView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         self.course = form.cleaned_data['course']
         self.course.students.add(self.request.user)
+        logger.info(f"Student {self.request.user.email} enrolled in {self.course}")
         return super().form_valid(form)
 
     def get_success_url(self):

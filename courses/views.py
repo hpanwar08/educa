@@ -18,7 +18,7 @@ from courses.models import Course, Module, Content, Subject
 from students.forms import CourseEnrollForm
 
 
-# logger = logging.getLogger('educa')
+logger = logging.getLogger(__name__)
 
 
 class OwnerMixin:
@@ -186,7 +186,7 @@ class CourseListView(TemplateResponseMixin, View):
     def get(self, request, subject=None):
         subjects = cache.get('all_subjects')
         if not subjects:
-            logging.info('subjects not in cache')
+            logger.info('subjects not in cache')
             subjects = Subject.objects.annotate(total_courses=Count('courses'))
             cache.set('all_subjects', subjects)
 
@@ -198,13 +198,13 @@ class CourseListView(TemplateResponseMixin, View):
             key = f"subject_{subject.id}_courses"
             courses = cache.get(key)
             if not courses:
-                logging.info(f"filtered courses not in cache {key}")
+                logger.info(f"filtered courses not in cache {key}")
                 courses = all_courses.filter(subject=subject).order_by('-created')
                 cache.set(key, courses)
         else:
             courses = cache.get('all_courses')
             if not courses:
-                logging.info("courses not in cache")
+                logger.info("courses not in cache")
                 courses = all_courses
                 cache.set('all_courses', courses)
 

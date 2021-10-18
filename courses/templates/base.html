@@ -33,6 +33,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'course_create' %}">New Course</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'manage_course_list' %}">My Courses</a>
+                </li>
               {% endif %}
 
             {% endif %}
@@ -52,6 +55,13 @@
                   <li>
                     <hr class="dropdown-divider">
                   </li>
+                  {% if request.user.is_instructor %}
+                    <li><a class="dropdown-item" href="{% url 'course_create' %}">New Course</a></li>
+                    <li><a class="dropdown-item" href="{% url 'manage_course_list' %}">My Courses</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                  {% endif %}
                   <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a></li>
                 </ul>
               </li>
