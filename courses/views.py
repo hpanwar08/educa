@@ -186,9 +186,9 @@ class CourseListView(TemplateResponseMixin, View):
     def get(self, request, subject=None):
         subjects = cache.get('all_subjects')
         if not subjects:
-            logger.info('subjects not in cache')
             subjects = Subject.objects.annotate(total_courses=Count('courses'))
             cache.set('all_subjects', subjects)
+            logger.info('Subjects all_subjects added to cache')
 
         all_courses = Course.objects.annotate(total_modules=Count('modules'))
 
@@ -198,15 +198,15 @@ class CourseListView(TemplateResponseMixin, View):
             key = f"subject_{subject.id}_courses"
             courses = cache.get(key)
             if not courses:
-                logger.info(f"filtered courses not in cache {key}")
                 courses = all_courses.filter(subject=subject).order_by('-created')
                 cache.set(key, courses)
+                logger.info(f"Filtered courses {key} added to cache")
         else:
             courses = cache.get('all_courses')
             if not courses:
-                logger.info("courses not in cache")
                 courses = all_courses
                 cache.set('all_courses', courses)
+                logger.info("Courses all_courses added to cache")
 
         return self.render_to_response({'subjects': subjects, 'courses': courses, 'subject': subject})
 

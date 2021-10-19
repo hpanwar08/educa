@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import FormView
 from django.views.generic.list import ListView
+from django.core.cache import cache
 
 from courses.models import Course
 from students.forms import CourseEnrollForm
@@ -54,7 +55,7 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
         return qs.filter(students__in=[self.request.user])
 
 
-class StudentCourseDetailView(DetailView):
+class StudentCourseDetailView(LoginRequiredMixin, DetailView):
     model = Course
     template_name = 'students/course/detail.html'
     context_object_name = 'course'
@@ -69,7 +70,13 @@ class StudentCourseDetailView(DetailView):
         course = self.get_object()
 
         if 'module_id' in self.kwargs:
-            context['module'] = course.modules.get(id=self.kwargs['module_id'])
+            key = f"enrolled_module_{course.id}_{self.kwargs['module_id']}"
+            module = cache.get(key)
+            if not module:
+                module = course.modules.get(id=self.kwargs['module_id'])
+                cache.set(key, module)
+                logger.debug(f"Added course module {key} to cache")
+            context['module'] = module
         else:
             context['module'] = course.modules.all()[0]
 
