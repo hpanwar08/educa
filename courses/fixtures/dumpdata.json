@@ -1,0 +1,1128 @@
+[
+{
+  "model": "accounts.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$SO7UAf7s3uMU$SSEiXGraySlfHeTz8fTt3JM3WXmzX5tlLJWw5SC26DA=",
+    "last_login": "2021-10-14T08:33:51.551Z",
+    "is_superuser": true,
+    "email": "admin@abc.com",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "is_instructor": false,
+    "date_joined": "2021-10-14T04:33:32.284Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$saYFP9H9wFqz$PTQdIOhcb03eGVfRlV4lRYxotvZCgt5vI1Ad39gbaFM=",
+    "last_login": "2021-10-18T06:57:55.237Z",
+    "is_superuser": false,
+    "email": "ins1@abc.com",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "is_instructor": true,
+    "date_joined": "2021-10-14T08:59:19.128Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$QhxeaNUIpFew$Qi3SxUMhW6AT/NY+Zx05uuNT1qc3yDt6CKZlei3jEs4=",
+    "last_login": "2021-10-20T09:40:24.324Z",
+    "is_superuser": false,
+    "email": "stu1@abc.com",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "is_instructor": false,
+    "date_joined": "2021-10-14T09:00:08.486Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$cXpKNm1mOxAA$5VwWibpWJhTkDD9goxV+mDDoeH9z5dhBbEok4Gulb2U=",
+    "last_login": "2021-10-18T10:35:40.561Z",
+    "is_superuser": false,
+    "email": "ins2@abc.com",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "is_instructor": true,
+    "date_joined": "2021-10-14T09:11:24.874Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$260000$FjJBN4uQgyA7bkKp2e3p2e$YX63pkH5z4zi1G55MY6oKmFeyTebTFmYuQ6Mt9p3GRM=",
+    "last_login": "2021-10-22T06:42:14.019Z",
+    "is_superuser": false,
+    "email": "stu2@abc.com",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "is_instructor": false,
+    "date_joined": "2021-10-18T10:42:05.390Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 1,
+  "fields": {
+    "title": "Programming",
+    "slug": "programming"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 2,
+  "fields": {
+    "title": "Music",
+    "slug": "music"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 3,
+  "fields": {
+    "title": "Photography",
+    "slug": "photography"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 4,
+  "fields": {
+    "title": "Mathematics",
+    "slug": "mathematics"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 5,
+  "fields": {
+    "title": "Project Management",
+    "slug": "project-management"
+  }
+},
+{
+  "model": "courses.course",
+  "pk": 1,
+  "fields": {
+    "owner": 2,
+    "subject": 1,
+    "title": "Django for Beginners",
+    "slug": "django-for-beginners",
+    "overview": "Getting started with Django",
+    "created": "2021-10-14T10:32:36.614Z",
+    "students": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "courses.course",
+  "pk": 2,
+  "fields": {
+    "owner": 4,
+    "subject": 1,
+    "title": "Python 101",
+    "slug": "python-101",
+    "overview": "Basics of Python",
+    "created": "2021-10-18T10:36:05.156Z",
+    "students": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "courses.module",
+  "pk": 1,
+  "fields": {
+    "course": 1,
+    "title": "Introduction to Django",
+    "description": "Django (/ˈdʒæŋɡoʊ/ JANG-goh; sometimes stylized as django)[6] is a Python-based free and open-source web framework that follows the model–template–views (MTV) architectural pattern.[7][8] It is maintained by the Django Software Foundation (DSF), an American independent organization established as a 501(c)(3) non-profit.\r\n\r\nDjango's primary goal is to ease the creation of complex, database-driven websites. The framework emphasizes reusability and \"pluggability\" of components, less code, low coupling, rapid development, and the principle of don't repeat yourself.[9] Python is used throughout, even for settings, files, and data models. Django also provides an optional administrative create, read, update and delete interface that is generated dynamically through introspection and configured via admin models.\r\n\r\nSome well-known sites that use Django include Instagram,[10] Mozilla,[11] Disqus,[12] Bitbucket,[13] Nextdoor[14] and Clubhouse.[15]",
+    "order": 0
+  }
+},
+{
+  "model": "courses.module",
+  "pk": 2,
+  "fields": {
+    "course": 1,
+    "title": "Cheatsheet",
+    "description": "",
+    "order": 1
+  }
+},
+{
+  "model": "courses.module",
+  "pk": 3,
+  "fields": {
+    "course": 2,
+    "title": "Introduction to Python",
+    "description": "Python is an interpreted high-level general-purpose programming language. Its design philosophy emphasizes code readability with its use of significant indentation. Its language constructs as well as its object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.[31]\r\n\r\nPython is dynamically-typed and garbage-collected. It supports multiple programming paradigms, including structured (particularly, procedural), object-oriented and functional programming. It is often described as a \"batteries included\" language due to its comprehensive standard library.[32]\r\n\r\nGuido van Rossum began working on Python in the late 1980s, as a successor to the ABC programming language, and first released it in 1991 as Python 0.9.0.[33] Python 2.0 was released in 2000 and introduced new features, such as list comprehensions and a garbage collection system using reference counting. Python 3.0 was released in 2008 and was a major revision of the language that is not completely backward-compatible. Python 2 was discontinued with version 2.7.18 in 2020.[34]\r\n\r\nPython consistently ranks as one of the most popular programming languages.[35][36][37][38]",
+    "order": 0
+  }
+},
+{
+  "model": "courses.module",
+  "pk": 4,
+  "fields": {
+    "course": 2,
+    "title": "Data types in python",
+    "description": "",
+    "order": 1
+  }
+},
+{
+  "model": "courses.module",
+  "pk": 5,
+  "fields": {
+    "course": 2,
+    "title": "Control Flow",
+    "description": "Python's statements include (among others):\r\n\r\nThe assignment statement, using a single equals sign =.\r\nThe if statement, which conditionally executes a block of code, along with else and elif (a contraction of else-if).\r\nThe for statement, which iterates over an iterable object, capturing each element to a local variable for use by the attached block.\r\nThe while statement, which executes a block of code as long as its condition is true.\r\nThe try statement, which allows exceptions raised in its attached code block to be caught and handled by except clauses; it also ensures that clean-up code in a finally block will always be run regardless of how the block exits.\r\nThe raise statement, used to raise a specified exception or re-raise a caught exception.\r\nThe class statement, which executes a block of code and attaches its local namespace to a class, for use in object-oriented programming.\r\nThe def statement, which defines a function or method.\r\nThe with statement, which encloses a code block within a context manager (for example, acquiring a lock before the block of code is run and releasing the lock afterwards, or opening a file and then closing it), allowing resource-acquisition-is-initialization (RAII)-like behavior and replaces a common try/finally idiom.[81]\r\nThe break statement, exits from a loop.\r\nThe continue statement, skips this iteration and continues with the next item.\r\nThe del statement, removes a variable, which means the reference from the name to the value is deleted and trying to use that variable will cause an error. A deleted variable can be reassigned.\r\nThe pass statement, which serves as a NOP. It is syntactically needed to create an empty code block.\r\nThe assert statement, used during debugging to check for conditions that should apply.\r\nThe yield statement, which returns a value from a generator function and yield is also an operator. This form is used to implement coroutines.\r\nThe return statement, used to return a value from a function.\r\nThe import statement, which is used to import modules whose functions or variables can be used in the current program.",
+    "order": 2
+  }
+},
+{
+  "model": "courses.content",
+  "pk": 1,
+  "fields": {
+    "module": 1,
+    "content_type": 4,
+    "object_id": 1,
+    "order": 0
+  }
+},
+{
+  "model": "courses.content",
+  "pk": 2,
+  "fields": {
+    "module": 2,
+    "content_type": 6,
+    "object_id": 1,
+    "order": 0
+  }
+},
+{
+  "model": "courses.content",
+  "pk": 3,
+  "fields": {
+    "module": 3,
+    "content_type": 4,
+    "object_id": 2,
+    "order": 0
+  }
+},
+{
+  "model": "courses.content",
+  "pk": 4,
+  "fields": {
+    "module": 5,
+    "content_type": 4,
+    "object_id": 3,
+    "order": 0
+  }
+},
+{
+  "model": "courses.content",
+  "pk": 5,
+  "fields": {
+    "module": 5,
+    "content_type": 3,
+    "object_id": 1,
+    "order": 1
+  }
+},
+{
+  "model": "courses.content",
+  "pk": 6,
+  "fields": {
+    "module": 4,
+    "content_type": 6,
+    "object_id": 2,
+    "order": 0
+  }
+},
+{
+  "model": "courses.text",
+  "pk": 1,
+  "fields": {
+    "owner": 2,
+    "title": "Intro",
+    "created": "2021-10-18T07:07:13.466Z",
+    "updated": "2021-10-18T07:07:13.466Z",
+    "content": "Django was created in the fall of 2003, when the web programmers at the Lawrence Journal-World newspaper, Adrian Holovaty and Simon Willison, began using Python to build applications. Jacob Kaplan-Moss was hired early in Django's development shortly before Simon Willison's internship ended.[16] It was released publicly under a BSD license in July 2005. The framework was named after guitarist Django Reinhardt.[17] Adrian Holovaty is a Romani jazz guitar player and a big fan of Django Reinhardt.\r\n\r\nIn June 2008, it was announced that a newly formed Django Software Foundation (DSF) would maintain Django in the future.[18]"
+  }
+},
+{
+  "model": "courses.text",
+  "pk": 2,
+  "fields": {
+    "owner": 4,
+    "title": "Intro",
+    "created": "2021-10-18T10:36:55.245Z",
+    "updated": "2021-10-18T10:36:55.245Z",
+    "content": "Python is an interpreted high-level general-purpose programming language. Its design philosophy emphasizes code readability with its use of significant indentation. Its language constructs as well as its object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.[31]\r\n\r\nPython is dynamically-typed and garbage-collected. It supports multiple programming paradigms, including structured (particularly, procedural), object-oriented and functional programming. It is often described as a \"batteries included\" language due to its comprehensive standard library.[32]\r\n\r\nGuido van Rossum began working on Python in the late 1980s, as a successor to the ABC programming language, and first released it in 1991 as Python 0.9.0.[33] Python 2.0 was released in 2000 and introduced new features, such as list comprehensions and a garbage collection system using reference counting. Python 3.0 was released in 2008 and was a major revision of the language that is not completely backward-compatible. Python 2 was discontinued with version 2.7.18 in 2020.[34]\r\n\r\nPython consistently ranks as one of the most popular programming languages.[35][36][37][38]"
+  }
+},
+{
+  "model": "courses.text",
+  "pk": 3,
+  "fields": {
+    "owner": 4,
+    "title": "Control Flow",
+    "created": "2021-10-18T10:37:30.363Z",
+    "updated": "2021-10-18T10:37:30.363Z",
+    "content": "Python's statements include (among others):\r\n\r\nThe assignment statement, using a single equals sign =.\r\nThe if statement, which conditionally executes a block of code, along with else and elif (a contraction of else-if).\r\nThe for statement, which iterates over an iterable object, capturing each element to a local variable for use by the attached block.\r\nThe while statement, which executes a block of code as long as its condition is true.\r\nThe try statement, which allows exceptions raised in its attached code block to be caught and handled by except clauses; it also ensures that clean-up code in a finally block will always be run regardless of how the block exits.\r\nThe raise statement, used to raise a specified exception or re-raise a caught exception.\r\nThe class statement, which executes a block of code and attaches its local namespace to a class, for use in object-oriented programming.\r\nThe def statement, which defines a function or method.\r\nThe with statement, which encloses a code block within a context manager (for example, acquiring a lock before the block of code is run and releasing the lock afterwards, or opening a file and then closing it), allowing resource-acquisition-is-initialization (RAII)-like behavior and replaces a common try/finally idiom.[81]\r\nThe break statement, exits from a loop.\r\nThe continue statement, skips this iteration and continues with the next item.\r\nThe del statement, removes a variable, which means the reference from the name to the value is deleted and trying to use that variable will cause an error. A deleted variable can be reassigned.\r\nThe pass statement, which serves as a NOP. It is syntactically needed to create an empty code block.\r\nThe assert statement, used during debugging to check for conditions that should apply.\r\nThe yield statement, which returns a value from a generator function and yield is also an operator. This form is used to implement coroutines.\r\nThe return statement, used to return a value from a function.\r\nThe import statement, which is used to import modules whose functions or variables can be used in the current program."
+  }
+},
+{
+  "model": "courses.image",
+  "pk": 1,
+  "fields": {
+    "owner": 2,
+    "title": "Django Cheatsheet",
+    "created": "2021-10-18T07:07:56.245Z",
+    "updated": "2021-10-18T07:07:56.245Z",
+    "content": "images/cheatsheet.png"
+  }
+},
+{
+  "model": "courses.image",
+  "pk": 2,
+  "fields": {
+    "owner": 4,
+    "title": "Data types",
+    "created": "2021-10-18T10:38:43.209Z",
+    "updated": "2021-10-18T10:38:43.209Z",
+    "content": "images/Python-data-structure.jpg"
+  }
+},
+{
+  "model": "courses.video",
+  "pk": 1,
+  "fields": {
+    "owner": 4,
+    "title": "Control Flow",
+    "created": "2021-10-18T10:38:03.652Z",
+    "updated": "2021-10-18T10:38:03.652Z",
+    "content": "https://www.youtube.com/watch?v=Zp5MuPOtsSY"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2021-10-14T08:34:18.134Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "1",
+    "object_repr": "Instructors",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2021-10-14T09:02:03.173Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "2",
+    "object_repr": "ins1@abc.com",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Are you a instructor\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2021-10-14T10:31:11.428Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "1",
+    "object_repr": "Programming",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2021-10-14T10:31:15.851Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "2",
+    "object_repr": "Music",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2021-10-14T10:31:30.827Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "3",
+    "object_repr": "Photography",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2021-10-14T10:31:37.174Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "4",
+    "object_repr": "Mathematics",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2021-10-14T10:31:45.822Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "5",
+    "object_repr": "Project Management",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add course",
+    "content_type": 1,
+    "codename": "add_course"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change course",
+    "content_type": 1,
+    "codename": "change_course"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete course",
+    "content_type": 1,
+    "codename": "delete_course"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view course",
+    "content_type": 1,
+    "codename": "view_course"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add subject",
+    "content_type": 2,
+    "codename": "add_subject"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change subject",
+    "content_type": 2,
+    "codename": "change_subject"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete subject",
+    "content_type": 2,
+    "codename": "delete_subject"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view subject",
+    "content_type": 2,
+    "codename": "view_subject"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add video",
+    "content_type": 3,
+    "codename": "add_video"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change video",
+    "content_type": 3,
+    "codename": "change_video"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete video",
+    "content_type": 3,
+    "codename": "delete_video"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view video",
+    "content_type": 3,
+    "codename": "view_video"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add text",
+    "content_type": 4,
+    "codename": "add_text"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change text",
+    "content_type": 4,
+    "codename": "change_text"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete text",
+    "content_type": 4,
+    "codename": "delete_text"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view text",
+    "content_type": 4,
+    "codename": "view_text"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add module",
+    "content_type": 5,
+    "codename": "add_module"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change module",
+    "content_type": 5,
+    "codename": "change_module"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete module",
+    "content_type": 5,
+    "codename": "delete_module"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view module",
+    "content_type": 5,
+    "codename": "view_module"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add image",
+    "content_type": 6,
+    "codename": "add_image"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change image",
+    "content_type": 6,
+    "codename": "change_image"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete image",
+    "content_type": 6,
+    "codename": "delete_image"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view image",
+    "content_type": 6,
+    "codename": "view_image"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add file",
+    "content_type": 7,
+    "codename": "add_file"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change file",
+    "content_type": 7,
+    "codename": "change_file"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete file",
+    "content_type": 7,
+    "codename": "delete_file"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view file",
+    "content_type": 7,
+    "codename": "view_file"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add content",
+    "content_type": 8,
+    "codename": "add_content"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change content",
+    "content_type": 8,
+    "codename": "change_content"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete content",
+    "content_type": 8,
+    "codename": "delete_content"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view content",
+    "content_type": 8,
+    "codename": "view_content"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 9,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 9,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 9,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 9,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 10,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 10,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 10,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 10,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 11,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 11,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 11,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 11,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 12,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 12,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 12,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 12,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 13,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 13,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 13,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 13,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 14,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 14,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 14,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 14,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "Instructors",
+    "permissions": [
+      29,
+      30,
+      31,
+      32,
+      1,
+      2,
+      3,
+      4,
+      25,
+      26,
+      27,
+      28,
+      21,
+      22,
+      23,
+      24,
+      17,
+      18,
+      19,
+      20,
+      13,
+      14,
+      15,
+      16,
+      9,
+      10,
+      11,
+      12
+    ]
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "courses",
+    "model": "course"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "courses",
+    "model": "subject"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "courses",
+    "model": "video"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "courses",
+    "model": "text"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "courses",
+    "model": "module"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "courses",
+    "model": "image"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "courses",
+    "model": "file"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "courses",
+    "model": "content"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "accounts",
+    "model": "user"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "639zrwkn1hvtkxv47bagoxonhv2gang7",
+  "fields": {
+    "session_data": ".eJxVjDEOwjAMRe-SGUU4cVrCyM4ZKjuxaQElUtNOiLtDpQ6w_vfef5mB1mUc1ibzMGVzNmAOvxtTekjZQL5TuVWbalnmie2m2J02e61Znpfd_TsYqY3fuoNTzBg1q_aOMAECHxHRg3QhJXEdh-AgBBTvE2Xl6JXVSQ9Re47m_QHc9zgK:1masRF:-JdU6RMsUuaQ2ZSdA0Fvo3GlA_vvPtCWaJ0crVhwaXs",
+    "expire_date": "2021-10-28T04:33:53.002Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "7cx3449xraicw8gmj0evpihqilrxx3o7",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hCQMhSX7j0DGWZGqRpISrsy3l2bdKHb_977L5VwXUpau8xpYnVSXh1-t4z0kLoBvmO9NU2tLvOU9abonXZ9aSzP8-7-HRTs5VuPQmSsB3ZDYALr2YA7ArorMAUXcowAQQYbLSNKDkJsR7HOIJKnrN4f4vo4Xg:1mcRVX:0xH7CknxAwYry15t4XNmyLMm6YfxGUZr4DOCamlDz8Q",
+    "expire_date": "2021-11-01T12:12:47.740Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "8wm6h7hu24mrtpbv9m7sgcxgmpnyi5tw",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQAP_C2RApW6AevfcNZNndStXQpLQn498Npge9zkzmpSLuW457lTXOrC6qV6dflpAeUprgO5bbomkp2zon3RJ92KrHheV5Pdq_Qcaa27abDBkQA0gBKA3eIHkbAk6DTa4Dlm_AvXFkPfNZQELnHARyTKDeH-mzOAc:1mcQnu:g0GBWxN14BbI48Y9R5Nmc8o-jj0vxyIy1kBuEn8OTqI",
+    "expire_date": "2021-11-01T11:27:42.390Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "93pif13hoh8jkiz4zmn6rrmitwjbp8ta",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQBf-FsyGFBQoevfcbyLKAVA0kpT0Z_9026UGvM_Pem3nc1uK3nhY_R3Zlml1-WUB6pnqI-MB6b5xaXZc58CPhp-18ajG9bmf7d1Cwl30tnDDJaDvEMYBEMYLSOSuL4FCiAjIISSIAOkGayFgKTuDOTQI5ZPb5AsvjN5U:1mdoFq:BS17_cVbyYYUBP0-0KB5YKCX_nVQFfggK2NYhtOCNGU",
+    "expire_date": "2021-11-05T06:42:14.078Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "c92q7dkabotvamrzkfnkgqg2lc37ifw1",
+  "fields": {
+    "session_data": ".eJxVjDEOwjAMRe-SGUU4cVrCyM4ZKjuxaQElUtNOiLtDpQ6w_vfef5mB1mUc1ibzMGVzNmAOvxtTekjZQL5TuVWbalnmie2m2J02e61Znpfd_TsYqY3fuoNTzBg1q_aOMAECHxHRg3QhJXEdh-AgBBTvE2Xl6JXVSQ9Re47m_QHc9zgK:1mawBT:nRmBrD8h6l-qffW3Wkr6Z8Bq6ddzKCg3A2gSdlPld-E",
+    "expire_date": "2021-10-28T08:33:51.612Z"
+  }
+}
+]

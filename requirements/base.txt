@@ -5,10 +5,7 @@ django-widget-tweaks
 django-braces
 django-embed-video
 django-redis==5.0.0
-# python-memcached
-# django-memcache-status
 djangorestframework
 drf-yasg
 pyyaml
 uritemplate
-django-debug-toolbar==3.2.2
