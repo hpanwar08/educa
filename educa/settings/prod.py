@@ -4,7 +4,8 @@ DEBUG = False
 
 ADMINS = (('Admin','admin@admin.com'),)
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.educa.com', 'www.educa.com']
 
 DATABASES = {
     'default': {

@@ -9,7 +9,7 @@ services:
 #    command: uwsgi --ini config/uwsgi.ini
     command: gunicorn educa.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - ./:/usr/src/educa/
+#      - ./:/usr/src/educa/
       - static_volume:/usr/src/educa/staticfiles
       - media_volume:/usr/src/educa/media
     expose:
@@ -39,7 +39,7 @@ services:
       - static_volume:/usr/src/educa/staticfiles
       - media_volume:/usr/src/educa/media
     ports:
-      - 1337:8000
+      - 80:8000
     depends_on:
       - web
 
