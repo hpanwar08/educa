@@ -50,4 +50,3 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
         return self.retrieve(request, *args, **kwargs)
 
 
-from rest_framework.throttling import UserRateThrottle
