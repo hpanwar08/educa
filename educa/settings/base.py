@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'students.apps.StudentsConfig',
+    'chat.apps.ChatConfig',
     'embed_video',
     'rest_framework',
     'drf_yasg'

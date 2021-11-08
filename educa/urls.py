@@ -27,6 +27,7 @@ urlpatterns = [
     path('course/', include('courses.urls')),
     path('', course_views.CourseListView.as_view(), name='course_list'),
     path('students/', include('students.urls')),
+    path('chat/', include('chat.urls', namespace='chat')),
     path('api/v1/', include('courses.api.urls')),
 
 ]
