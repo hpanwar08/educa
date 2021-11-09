@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'chat.apps.ChatConfig',
     'embed_video',
     'rest_framework',
-    'drf_yasg'
+    'drf_yasg',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'educa.wsgi.application'
+# channels
+ASGI_APPLICATION = 'educa.asgi.application'
 
 
 # Database

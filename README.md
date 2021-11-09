@@ -13,6 +13,7 @@ Django features used
 * Ajax requests
 * Caching
 * REST API using djangorestframework
+* Chat application using channels
 
 
 ## Steps to run
