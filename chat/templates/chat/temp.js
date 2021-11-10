@@ -5,8 +5,21 @@ $(document).ready(function () {
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
         const message = data.message;
+        const dateOptions = {hour: 'numeric', minute: 'numeric', hour12: true};
+        const datetime = new Date(data['datetime']).toLocaleString('en', dateOptions);
+        const isMe = data.user === '{{request.user}}';
+
+        const name = isMe ? 'Me' : data.user;
         const $chat = $('#chat');
-        $chat.append('<div class="w-75 mb-3"><div class="d-inline-flex p-2 text-break bg-light ">' + message + '</div></div><br>');
+
+        const msgSourceBG = isMe ? 'chat-bg-me' : 'chat-bg-other';
+        const msgAlignSource = isMe ? 'justify-content-end' : '';
+
+        $chat.append(
+            '<div class="w-100 d-inline-flex mb-2 ' + msgAlignSource + '">' +
+            '<div class="w-75 p-2 text-break ' + msgSourceBG + '"><small class="fw-lighter">' + name + '<span class="fst-italic"> ' + datetime + '</span></small><br>' + message + '</div>' +
+            '</div>'
+        );
         $chat.scrollTop($chat[0].scrollHeight);
 
     };

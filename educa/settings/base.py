@@ -82,6 +82,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'educa.wsgi.application'
 # channels
 ASGI_APPLICATION = 'educa.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('cache', 6379)],
+        },
+    },
+}
 
 
 # Database

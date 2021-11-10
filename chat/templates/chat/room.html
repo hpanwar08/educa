@@ -10,11 +10,13 @@
     <div class="col-md-8 offset-md-2">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title text-secondary text-center mb-3">Room {{ course.title }}</h4>
+          <h4 class="card-title text-secondary text-center mb-3"><a
+              href="{% url 'students:student_course_detail' course.id %}"
+              class="text-decoration-none">Room {{ course.title }}</a></h4>
           <hr>
 
           <div class="row">
-            <div id="chat" class="mb-3 overflow-auto vh-50" ></div>
+            <div id="chat" class="mb-3 overflow-auto vh-75"></div>
           </div>
 
           <div id="chat-input">
@@ -23,7 +25,7 @@
               <div class="col-md-10">
                 <input type="text" class="form-control" id="chat-message-input" placeholder="Type message">
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 d-grid">
                 <button class="btn btn-info text-white" id="chat-message-submit">Send</button>
               </div>
             </div>
@@ -38,38 +40,51 @@
 {% endblock %}
 
 {% block domready %}
-  const url = 'ws://' + window.location.host + '/ws/chat/room/' + '{{ course.id }}/';
-  const chatSocket = new WebSocket(url);
+    const url = 'ws://' + window.location.host + '/ws/chat/room/' + '{{ course.id }}/';
+    const chatSocket = new WebSocket(url);
 
-  chatSocket.onmessage = function (e) {
-      const data = JSON.parse(e.data);
-      const message = data.message;
-      const $chat = $('#chat');
-      $chat.append('<div class="w-75 mb-3"><div class="d-inline-flex p-2 text-break bg-light ">' + message + '</div></div><br>');
-      $chat.scrollTop($chat[0].scrollHeight);
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        const message = data.message;
+        const dateOptions = {hour: 'numeric', minute: 'numeric', hour12: true};
+        const datetime = new Date(data['datetime']).toLocaleString('en', dateOptions);
+        const isMe = data.user === '{{request.user}}';
 
-  };
+        const name = isMe ? 'Me' : data.user;
+        const $chat = $('#chat');
 
-  chatSocket.onclose = function (e) {
-      console.log('Chat socket closed unexpectedly')
-  };
+        const msgSourceBG = isMe ? 'chat-bg-me' : 'chat-bg-other';
+        const msgAlignSource = isMe ? 'justify-content-end' : '';
 
-  const $input = $('#chat-message-input');
-  const $submit = $('#chat-message-submit');
+        $chat.append(
+            '<div class="w-100 d-inline-flex mb-2 ' + msgAlignSource + '">' +
+            '<div class="w-75 p-2 text-break ' + msgSourceBG + '"><small class="fw-bold">' + name + '<span class="fw-lighter fst-italic"> ' + datetime + '</span></small><br>' + message + '</div>' +
+            '</div>'
+        );
+        $chat.scrollTop($chat[0].scrollHeight);
 
-  $submit.click(function () {
-      const message = $input.val();
-      if (message) {
-          chatSocket.send(JSON.stringify({'message': message}));
-          $input.val('');
-          $input.focus();
-      }
-  });
+    };
 
-  $input.focus();
-  $input.keyup(function (e){
-      if(e.keyCode === 13){
-          $submit.click()
-      }
-  });
+    chatSocket.onclose = function (e) {
+        console.log('Chat socket closed unexpectedly')
+    };
+
+    const $input = $('#chat-message-input');
+    const $submit = $('#chat-message-submit');
+
+    $submit.click(function () {
+        const message = $input.val();
+        if (message) {
+            chatSocket.send(JSON.stringify({'message': message}));
+            $input.val('');
+            $input.focus();
+        }
+    });
+
+    $input.focus();
+    $input.keyup(function (e) {
+        if (e.keyCode === 13) {
+            $submit.click()
+        }
+    });
 {% endblock %}
