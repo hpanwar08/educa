@@ -4,6 +4,8 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from django.utils import timezone
 
+from chat.models import Message
+
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
@@ -22,16 +24,36 @@ class ChatConsumer(WebsocketConsumer):
 
     def receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)
+        event_type = text_data_json['type']
         message = text_data_json['message']
 
         now = timezone.now()
 
-        # send message to group
-        async_to_sync(self.channel_layer.group_send)(self.room_group_name, {'type': 'chat_message', 'message': message,
-                                                                            'user': self.user.email,
-                                                                            'datetime': now.isoformat()})
-        # self.send(text_data=json.dumps({'message': message}))
+        if event_type == 'fetch_messages':
+            # fetch old messages
+            self.fetch_messages(text_data_json)
+        else:
+            Message.objects.create(
+                creator=self.user,
+                content=message,
+                group_name=self.room_group_name,
+            )
+            # send message to group
+            async_to_sync(self.channel_layer.group_send)(self.room_group_name,
+                                                         {'type': 'chat_message',
+                                                          'content': message,
+                                                          'creator': self.user.email,
+                                                          'created_at': now.isoformat()})
 
     def chat_message(self, event):
-        # message = event['message']
-        self.send(text_data=json.dumps(event))
+        self.send(text_data=json.dumps({'type': 'chat_message', 'message': [event]}))
+
+    def fetch_messages(self, data):
+        messages = reversed(Message.objects.filter(group_name=self.room_group_name)[:10])
+        result = []
+        for message in messages:
+            msg = message.to_json()
+            msg['type'] = 'all_message'
+            result.append(msg)
+            
+        self.send(json.dumps({'type': 'all_message', 'message': result}))
