@@ -33,14 +33,11 @@ class ChatConsumer(WebsocketConsumer):
             # fetch old messages
             self.fetch_messages(text_data_json)
         else:
-            Message.objects.create(
-                creator=self.user,
-                content=message,
-                group_name=self.room_group_name,
-            )
+            msg_id = self.save_chat(message)
             # send message to group
             async_to_sync(self.channel_layer.group_send)(self.room_group_name,
                                                          {'type': 'chat_message',
+                                                          'message_id': msg_id,
                                                           'content': message,
                                                           'creator': self.user.email,
                                                           'created_at': now.isoformat()})
@@ -49,11 +46,31 @@ class ChatConsumer(WebsocketConsumer):
         self.send(text_data=json.dumps({'type': 'chat_message', 'message': [event]}))
 
     def fetch_messages(self, data):
-        messages = reversed(Message.objects.filter(group_name=self.room_group_name)[:10])
+        messages = self.get_last_n_messages()
         result = []
         for message in messages:
-            msg = message.to_json()
+            msg = self.message_to_json(message)
             msg['type'] = 'all_message'
             result.append(msg)
-            
+
         self.send(json.dumps({'type': 'all_message', 'message': result}))
+
+    def save_chat(self, message):
+        msg = Message.objects.create(
+            creator=self.user,
+            content=message,
+            group_name=self.room_group_name,
+        )
+        return msg.id
+
+    def get_last_n_messages(self, n=10):
+        return reversed(Message.objects.filter(group_name=self.room_group_name)[:n])
+
+    def message_to_json(self, message):
+        return {
+            'message_id': message.id,
+            'creator': message.creator.email,
+            'content': message.content,
+            'group_name': message.group_name,
+            'created_at': message.created_at.isoformat()
+        }
