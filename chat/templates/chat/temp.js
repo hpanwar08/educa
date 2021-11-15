@@ -36,7 +36,6 @@ $(document).ready(function () {
                 '</div>'
             );
         }
-        ;
 
 
         $chat.scrollTop($chat[0].scrollHeight);
@@ -45,6 +44,10 @@ $(document).ready(function () {
 
     chatSocket.onclose = function (e) {
         console.log('Chat socket closed unexpectedly')
+    };
+
+    chatSocket.onerror = function (e) {
+        console.log(e)
     };
 
     const $input = $('#chat-message-input');

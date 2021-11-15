@@ -1,13 +1,13 @@
 import json
 
 from asgiref.sync import async_to_sync
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import WebsocketConsumer, JsonWebsocketConsumer
 from django.utils import timezone
 
 from chat.models import Message
 
 
-class ChatConsumer(WebsocketConsumer):
+class ChatConsumer(JsonWebsocketConsumer):
     def connect(self):
         self.user = self.scope['user']
         # get course id
@@ -15,14 +15,16 @@ class ChatConsumer(WebsocketConsumer):
         # make group name
         self.room_group_name = f"chat_{self.id}"
         # add channel to group
+
         async_to_sync(self.channel_layer.group_add)(self.room_group_name, self.channel_name)
+        print(self.room_group_name, self.channel_name)
         self.accept()
 
     def disconnect(self, code):
         # remove channel from group
         async_to_sync(self.channel_layer.group_discard)(self.room_group_name, self.channel_name)
 
-    def receive(self, text_data=None, bytes_data=None):
+    def receive(self, text_data=None, bytes_data=None, **kwargs):
         text_data_json = json.loads(text_data)
         event_type = text_data_json['type']
         message = text_data_json['message']
@@ -43,7 +45,7 @@ class ChatConsumer(WebsocketConsumer):
                                                           'created_at': now.isoformat()})
 
     def chat_message(self, event):
-        self.send(text_data=json.dumps({'type': 'chat_message', 'message': [event]}))
+        self.send_json(content={'type': 'chat_message', 'message': [event]})
 
     def fetch_messages(self, data):
         messages = self.get_last_n_messages()
@@ -53,7 +55,7 @@ class ChatConsumer(WebsocketConsumer):
             msg['type'] = 'all_message'
             result.append(msg)
 
-        self.send(json.dumps({'type': 'all_message', 'message': result}))
+        self.send_json(content={'type': 'all_message', 'message': result})
 
     def save_chat(self, message):
         msg = Message.objects.create(

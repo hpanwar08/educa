@@ -88,6 +88,10 @@
         console.log('Chat socket closed unexpectedly')
     };
 
+    chatSocket.onerror = function (e) {
+        console.log(e)
+    };
+
     const $input = $('#chat-message-input');
     const $submit = $('#chat-message-submit');
 
