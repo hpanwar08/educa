@@ -10,9 +10,9 @@
     <div class="col-md-8 offset-md-2">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title text-secondary text-center mb-3">Chat Room <a
+          <h3 class="card-title text-secondary text-center mb-3"><a
               href="{% url 'students:student_course_detail' course.id %}"
-              class="text-decoration-none">{{ course.title }}</a></h3>
+              class="text-decoration-none link-info">Chat Room {{ course.title }}</a></h3>
           <hr>
 
           <div class="row">
@@ -41,7 +41,7 @@
 
 {% block domready %}
     const url = 'ws://' + window.location.host + '/ws/chat/room/' + '{{ course.id }}/';
-    const chatSocket = new WebSocket(url);
+    const chatSocket = new ReconnectingWebSocket(url);
 
     chatSocket.onopen = function (e) {
         console.log('connection ready')

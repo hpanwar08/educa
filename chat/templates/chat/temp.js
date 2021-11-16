@@ -1,6 +1,6 @@
 $(document).ready(function () {
     const url = 'ws://' + window.location.host + '/ws/chat/room/' + '{{ course.id }}/';
-    const chatSocket = new WebSocket(url);
+    const chatSocket = new ReconnectingWebSocket(url);
 
     chatSocket.onopen = function (e) {
         console.log('connection ready')
