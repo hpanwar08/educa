@@ -1,10 +1,10 @@
 import json
 
 from asgiref.sync import async_to_sync
-from channels.generic.websocket import WebsocketConsumer, JsonWebsocketConsumer
+from channels.generic.websocket import JsonWebsocketConsumer
 from django.utils import timezone
 
-from chat.models import Message
+from chat.models import Message, ChatGroup
 
 
 class ChatConsumer(JsonWebsocketConsumer):
@@ -14,13 +14,24 @@ class ChatConsumer(JsonWebsocketConsumer):
         self.id = self.scope['url_route']['kwargs']['course_id']
         # make group name
         self.room_group_name = f"chat_{self.id}"
-        # add channel to group
 
+        # add group to db and add user to group
+        chat_group, _ = ChatGroup.objects.get_or_create(group_name=self.room_group_name)
+        print(self.user)
+        chat_group.participants.add(self.user)
+        self.chat_group = chat_group
+
+        # add channel to group
         async_to_sync(self.channel_layer.group_add)(self.room_group_name, self.channel_name)
         print(self.room_group_name, self.channel_name)
         self.accept()
 
     def disconnect(self, code):
+
+        chat_group = ChatGroup.objects.get(group_name=self.room_group_name)
+        chat_group.participants.remove(self.user)
+        self.chat_group = None
+
         # remove channel from group
         async_to_sync(self.channel_layer.group_discard)(self.room_group_name, self.channel_name)
 
@@ -40,15 +51,16 @@ class ChatConsumer(JsonWebsocketConsumer):
             async_to_sync(self.channel_layer.group_send)(self.room_group_name,
                                                          {'type': 'chat_message',
                                                           'message_id': msg_id,
-                                                          'content': message,
                                                           'creator': self.user.email,
+                                                          'content': message,
+                                                          'group_name': self.chat_group.id,
                                                           'created_at': now.isoformat()})
 
     def chat_message(self, event):
         self.send_json(content={'type': 'chat_message', 'message': [event]})
 
     def fetch_messages(self, data):
-        messages = self.get_last_n_messages()
+        messages = self.get_last_n_messages(20)
         result = []
         for message in messages:
             msg = self.message_to_json(message)
@@ -61,18 +73,18 @@ class ChatConsumer(JsonWebsocketConsumer):
         msg = Message.objects.create(
             creator=self.user,
             content=message,
-            group_name=self.room_group_name,
+            chat_group=self.chat_group,
         )
         return msg.id
 
     def get_last_n_messages(self, n=10):
-        return reversed(Message.objects.filter(group_name=self.room_group_name)[:n])
+        return reversed(Message.objects.filter(chat_group__group_name=self.room_group_name)[:n])
 
     def message_to_json(self, message):
         return {
             'message_id': message.id,
             'creator': message.creator.email,
             'content': message.content,
-            'group_name': message.group_name,
+            'group_name': message.chat_group.id,
             'created_at': message.created_at.isoformat()
         }
