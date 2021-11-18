@@ -25,6 +25,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=educa
+    ports:
+      - 5432:5432
 
   cache:
 #    image: memcached:1.6.10-alpine

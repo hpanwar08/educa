@@ -11,13 +11,12 @@ class ChatConsumer(JsonWebsocketConsumer):
     def connect(self):
         self.user = self.scope['user']
         # get course id
-        self.id = self.scope['url_route']['kwargs']['course_id']
+        self.course_id = self.scope['url_route']['kwargs']['course_id']
         # make group name
-        self.room_group_name = f"chat_{self.id}"
+        self.room_group_name = f"chat_{self.course_id}"
 
         # add group to db and add user to group
         chat_group, _ = ChatGroup.objects.get_or_create(group_name=self.room_group_name)
-        print(self.user)
         chat_group.participants.add(self.user)
         self.chat_group = chat_group
 

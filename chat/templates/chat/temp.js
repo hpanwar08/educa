@@ -4,9 +4,9 @@ $(document).ready(function () {
 
     chatSocket.onopen = function (e) {
         console.log('connection ready')
-        chatSocket.send(
-            JSON.stringify({'type': 'fetch_messages', 'message': 'hello'})
-        )
+        // chatSocket.send(
+        //     JSON.stringify({'type': 'fetch_messages', 'message': 'hello'})
+        // )
     };
 
     chatSocket.onmessage = function (e) {
