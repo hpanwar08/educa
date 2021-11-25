@@ -15,6 +15,7 @@ class CourseChatRoom(LoginRequiredMixin, View):
         try:
             course = self.request.user.courses_joined.get(id=kwargs['course_id'])
             chat_room = f"chat_{course.id}"
+            # get old messages
             messages = reversed(Message.objects.filter(chat_group__group_name=chat_room)[:20])
             old_messages = []
             for message in messages:
