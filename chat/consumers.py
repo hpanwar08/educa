@@ -27,8 +27,8 @@ class ChatConsumer(JsonWebsocketConsumer):
 
     def disconnect(self, code):
 
-        chat_group = ChatGroup.objects.get(group_name=self.room_group_name)
-        chat_group.participants.remove(self.user)
+        # chat_group = ChatGroup.objects.get(group_name=self.room_group_name)
+        # chat_group.participants.remove(self.user)
         self.chat_group = None
 
         # remove channel from group
